@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAlert } from "../../actions/alerts";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,13 +12,14 @@ const Register = () => {
   });
 
   const { name, email, password, password2 } = formData;
-
+  const dispatch = useDispatch();
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (password !== password2) {
+      dispatch(setAlert("Passwords do not match!", "danger"));
       console.log("Passwords do not match");
     } else {
       console.log("Succesfuly registered !");
