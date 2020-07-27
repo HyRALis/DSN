@@ -12,13 +12,13 @@ export default function Navbar() {
     <ul>
       <li>
         <Link to="/dashboard">
-          <i className="fas fa-sign-out-alt" />
-          <span className="hide-sm">Dispatch</span>
+          <i className="fas fa-user" />
+          <span className="hide-sm">Dashboard</span>
         </Link>
       </li>
       <li>
         <Link to="/" onClick={(e) => dispatch(logout())}>
-          <i className="fas fa-user" />
+          <i className="fas fa-sign-out-alt" />
           <span className="hide-sm">Logout</span>
         </Link>
       </li>
