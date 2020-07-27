@@ -11,8 +11,14 @@ export default function Navbar() {
   const authLInks = (
     <ul>
       <li>
+        <Link to="/dashboard">
+          <i className="fas fa-sign-out-alt" />
+          <span className="hide-sm">Dispatch</span>
+        </Link>
+      </li>
+      <li>
         <Link to="/" onClick={(e) => dispatch(logout())}>
-          <i class="fas fa-sign-out-alt"></i>
+          <i className="fas fa-user" />
           <span className="hide-sm">Logout</span>
         </Link>
       </li>
