@@ -1,9 +1,13 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { setAlert } from "../../actions/alerts";
+import { register } from "../../actions/auth";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,7 +16,6 @@ const Register = () => {
   });
 
   const { name, email, password, password2 } = formData;
-  const dispatch = useDispatch();
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -22,9 +25,15 @@ const Register = () => {
       dispatch(setAlert("Passwords do not match!", "danger"));
       console.log("Passwords do not match");
     } else {
+      dispatch(register({ name, email, password }));
       console.log("Succesfuly registered !");
     }
   };
+
+  //Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <Fragment>
@@ -64,7 +73,7 @@ const Register = () => {
             name="password"
             value={password}
             onChange={(e) => onChange(e)}
-            minLength="6"
+            minLength="8"
           />
         </div>
         <div className="form-group">
@@ -74,7 +83,7 @@ const Register = () => {
             value={password2}
             onChange={(e) => onChange(e)}
             name="password2"
-            minLength="6"
+            minLength="8"
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Register" />
