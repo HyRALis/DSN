@@ -1,10 +1,12 @@
-import React, { useState, Fragment } from "react";
-import { useDispatch } from "react-redux";
-import { createProfile } from "../../actions/profile";
+import React, { useState, Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createProfile, getProfile } from "../../actions/profile";
 import { Link, withRouter } from "react-router-dom";
 
-const CreateProfile = ({ history }) => {
+const EditProfile = ({ history }) => {
   const dispatch = useDispatch();
+  const profileData = useSelector((state) => state.profile.profile);
+  const profileLoading = useSelector((state) => state.profile.loading);
 
   const [formData, setFormData] = useState({
     company: "",
@@ -38,12 +40,51 @@ const CreateProfile = ({ history }) => {
     linkedin,
   } = formData;
 
+  useEffect(() => {
+    dispatch(getProfile());
+
+    setFormData({
+      company:
+        profileLoading || !profileData.company ? "" : profileData.company,
+      website:
+        profileLoading || !profileData.website ? "" : profileData.website,
+      location:
+        profileLoading || !profileData.location ? "" : profileData.location,
+      bio: profileLoading || !profileData.bio ? "" : profileData.bio,
+      status: profileLoading || !profileData.status ? "" : profileData.status,
+      githubusername:
+        profileLoading || !profileData.githubusername
+          ? ""
+          : profileData.githubusername,
+      skills:
+        profileLoading || !profileData.skills
+          ? ""
+          : profileData.skills.join(","),
+      youtube:
+        profileLoading || !profileData.social ? "" : profileData.social.youtube,
+      facebook:
+        profileLoading || !profileData.social
+          ? ""
+          : profileData.social.facebook,
+      twitter:
+        profileLoading || !profileData.social ? "" : profileData.social.twitter,
+      instagram:
+        profileLoading || !profileData.social
+          ? ""
+          : profileData.social.instagram,
+      linkedin:
+        profileLoading || !profileData.social
+          ? ""
+          : profileData.social.linkedin,
+    });
+  }, [profileLoading, dispatch]);
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(createProfile(formData, history));
+    dispatch(createProfile(formData, history, true));
   };
   return (
     <Fragment>
@@ -220,4 +261,4 @@ const CreateProfile = ({ history }) => {
   );
 };
 
-export default withRouter(CreateProfile);
+export default withRouter(EditProfile);
