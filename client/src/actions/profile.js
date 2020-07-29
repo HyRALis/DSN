@@ -26,6 +26,7 @@ export const getProfile = () => async (dispatch) => {
     });
   }
 };
+
 // Get all profiles
 export const getProfiles = () => async (dispatch) => {
   dispatch({ type: CLEAR_PROFILE });
@@ -43,10 +44,11 @@ export const getProfiles = () => async (dispatch) => {
     });
   }
 };
+
 // Get profile by id
-export const getProfilesByiD = (userId) => async (dispatch) => {
+export const getProfilesById = (userId) => async (dispatch) => {
   try {
-    const res = await axios.get(`api/profile/user/${userId}`);
+    const res = await axios.get(`/api/profile/user/${userId}`);
     dispatch({
       type: GET_PROFILE,
       payload: res.data,
@@ -58,6 +60,7 @@ export const getProfilesByiD = (userId) => async (dispatch) => {
     });
   }
 };
+
 //Get Github repos
 export const getGithubRepos = (githubUsername) => async (dispatch) => {
   try {
@@ -73,6 +76,7 @@ export const getGithubRepos = (githubUsername) => async (dispatch) => {
     });
   }
 };
+
 // Create or update a profile
 export const createProfile = (formData, history, edit = false) => async (
   dispatch
@@ -187,7 +191,7 @@ export const deleteExperince = (id) => async (dispatch) => {
   }
 };
 
-//Delete an eeducation
+//Delete an education
 export const deleteEducation = (id) => async (dispatch) => {
   try {
     const res = await axios.delete(`/api/profile/education/${id}`);
@@ -226,5 +230,3 @@ export const deleteAccount = () => async (dispatch) => {
     }
   }
 };
-
-//

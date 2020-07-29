@@ -11,6 +11,9 @@ export default function Navbar() {
   const authLInks = (
     <ul>
       <li>
+        <Link to="/profiles">Developers</Link>
+      </li>
+      <li>
         <Link to="/dashboard">
           <i className="fas fa-user" />
           <span className="hide-sm">Dashboard</span>
@@ -27,7 +30,7 @@ export default function Navbar() {
   const guestLinks = (
     <ul>
       <li>
-        <Link to="/developers">Developers</Link>
+        <Link to="/profiles">Developers</Link>
       </li>
       <li>
         <Link to="/register">Register</Link>
