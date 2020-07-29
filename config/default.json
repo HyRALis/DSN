@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://PetarT:petar123@devconnector.rklqu.mongodb.net/<dbname>?retryWrites=true&w=majority",
-  "jwtSecret": "DNSSecretToken"
+  "jwtSecret": "DNSSecretToken",
+  "githubClientId": "91baaa71c6e7006c3901",
+  "githubSecret": "c54770fc79fcb0dc316faa253b26e5b7fd3310fe"
 }
